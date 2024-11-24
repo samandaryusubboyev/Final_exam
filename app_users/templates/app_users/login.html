@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+		<section class="vh-100 bg-light">
+			<div class="container py-5 h-100">
+				<div class="row d-flex align-items-center justify-content-center h-100">
+					<div class="col-md-8 col-lg-7 col-xl-6">
+						<img
+							src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+							class="img-fluid"
+							alt="Phone image"
+						/>
+					</div>
+					<div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+						<form method="post" action="">
+							 {% csrf_token %}
+							<!-- Email input -->
+							<div data-mdb-input-init class="form-outline mb-4">
+								<input
+									type="email"
+									id="form1Example13"
+									name="username"
+									class="text-info form-control form-control-lg"
+								/>
+								<label class="text-info form-label" for="form1Example13"
+									>Email address</label
+								>
+							</div>
+
+							<!-- Password input -->
+							<div data-mdb-input-init class="form-outline mb-4">
+								<input
+									type="password"
+									id="form1Example23"
+									name="password"
+									class="text-info form-control form-control-lg"
+								/>
+								<label class="text-info form-label" for="form1Example23"
+									>Password</label
+								>
+							</div>
+
+                            <div
+								class="d-flex justify-content-around align-items-center mb-4"
+							>
+								<!-- Checkbox -->
+								<div class="form-check">
+									<input
+										class="form-check-input"
+										type="checkbox"
+										value=""
+										id="form1Example3"
+										checked
+									/>
+									<label
+										class="text-info form-check-label"
+										for="form1Example3"
+									>
+										Remember me
+									</label>
+								</div>
+								<a href="{% url 'password_reset' %}">Forgot password?</a>
+							</div>
+
+							<!-- Submit button -->
+							<button
+								type="submit"
+								data-mdb-button-init
+								data-mdb-ripple-init
+								class="btn btn-primary btn-lg btn-block"
+							>
+								Sign in
+							</button>
+
+							<div
+								class="divider d-flex align-items-center my-4 d-flex justify-content-center"
+							>
+								<p class="text-info text-center fw-bold mx-3 mb-0">OR</p>
+							</div>
+							<div style="display: flex; flex-direction: column; gap: 10px; align-items: center;">
+								<button style="border-radius: 20px; border: none; background-color: none; padding: 4px 8px;">
+									<a href="{% url 'social:begin' 'google-oauth2' %}">Login With Google</a>
+								</button>
+
+							</div>
+
+						</form>
+						<div class="d-flex justify-content-center mt-3">
+							<p class="m-0 text-info">
+								Don't have an account ?
+								<a href="{% url 'registration' %}">Sign up</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+{% endblock content %}

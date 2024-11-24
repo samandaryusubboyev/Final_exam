@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load humanize %}
+
+{% block content %}
+        <!-- Product section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{ product.image.url }}" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1 d-flex flex-row gap-2 align-items-center">
+                            <div class="d-flex small text-warning"></div></div>
+
+
+                        <h1 class="display-5 fw-bolder">{{ product.name }}</h1>
+                        <div class="fs-5 mb-5">
+                            <span class="text-decoration-line-through text-muted">${{ product.old_price|intcomma }}</span>
+                            -
+                            <span>${{ product.new_price }}</span>
+                        </div>
+                        <p class="lead">
+                            {{ product.description|linebreaksbr|truncatechars:100 }}
+                        </p>
+                        <div class="d-flex w-100">
+                            <form action="{% url 'add_to_cart' product.id %}" method="post" class="w-100">
+                                {% csrf_token %}
+                                <input id="product-id" type="hidden" name="product_id" value="{{ product.id }}">
+                                <input id="product-quantity" type="hidden" name="quantity" value="1">
+                                <div class="d-flex flex-column w-100">
+                                    {% if not request.user.is_authenticated %}
+                                        <b>
+                                            Please, <a href="{% url 'login' %}?next=/detail/{{ product.id }}/">log in</a> to add product to your cart
+                                        </b>
+                                    {% else %}
+                                        <a href="{% url 'add_to_cart' product.id %}"
+                                       class="mt-2 w-100 d-flex align-items-center justify-content-center font-bold btn btn-warning">
+                                        <i class="bi bi-cart-plus"></i>
+                                        Add to cart
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% endblock content %}
