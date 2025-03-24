@@ -1,14 +1,11 @@
-
 from django.shortcuts import redirect, render
 from .models import UserModel
 
 
-from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import logout, authenticate, login
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView
-from django.urls.base import reverse
 from django.views.generic import CreateView, ListView, DeleteView, UpdateView
 from django.contrib.auth import get_user_model
 
